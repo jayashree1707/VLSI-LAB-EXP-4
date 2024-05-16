@@ -106,6 +106,79 @@ endmodule
 
 ## COUNTER
 ![image](https://github.com/navaneethans/VLSI-LAB-EXP-4/assets/6987778/a1fc5f68-aafb-49a1-93d2-779529f525fa)
+## UPDOWN COUNTER:
+## VERILOG CODE:
+```
+module updowncounter(clk,e,rst,count);
+input e,rst,clk;
+output reg[3:0]count;
+always@(posedge clk)
+begin
+if(rst)
+count=4'b0;
+else
+begin
+if(e==1)
+count=count+4'b1;
+ else 
+ count=count-4'b1;
+ end 
+ end
+endmodule
+```
+### OUTPUT:
+![WhatsApp Image 2024-04-12 at 20 49 39_e042057c](https://github.com/jayashree1707/VLSI-LAB-EXP-4/assets/160314881/615a391b-7ad9-419e-9ff0-8b6e99fa9014)
+### MOD 10 COUNTER:
+## VERILOG CODE:
+```
+module counter10(clk,rst,count);
+input clk,rst;
+output reg [3:0]count;
+always@(posedge clk)
+begin
+if (rst==1 | count == 4'b1001)
+count=4'b0;
+else
+count=count+4'b1;
+end
+endmodule
+```
+## OUTPUT:
+![WhatsApp Image 2024-04-12 at 20 47 33_b3f532d5](https://github.com/jayashree1707/VLSI-LAB-EXP-4/assets/160314881/244933f1-c0f1-45f4-a18a-51d580e3ac80)
+### RIPPLE CARRY COUNTER:
+### VERILOG CODE:
+```
+module ripplecounter(q,clk,reset);
+input clk,reset;
+output[3:0]q;
+T_FF tff0(q[0],clk,reset);
+T_FF tff1(q[1],q[0],reset);
+T_FF tff2(q[2],q[1],reset);
+T_FF tff3(q[3],q[2],reset);
+endmodule
+module D_FF(q,d,clk,reset);
+input d,clk,reset;
+output reg q;
+always@(negedge clk or posedge reset)
+begin
+if(reset)
+q<=1'b0;
+else
+q<=d;
+end
+endmodule
+module T_FF(q,clk,reset);
+input clk,reset;
+output q;
+wire d;
+D_FF dff0(q,d,clk,reset);
+not n1(d,q);
+endmodule
+```
+## OUTPUT:
+![WhatsApp Image 2024-04-12 at 20 48 37_eb479c8a](https://github.com/jayashree1707/VLSI-LAB-EXP-4/assets/160314881/dead3e75-ef9f-400f-adac-91d90504f279)
+
+
 
 
   
@@ -115,6 +188,6 @@ endmodule
 
 
 ## RESULT:
-   Hence thus given To simulate and synthesis SR, JK, T, D - FLIPFLOP, COUNTER DESIGN using Xilinx ISE.
+   Hence thus given To simulate and synthesis SR, JK, T, D - FLIPFLOP, COUNTER DESIGN using vivado.
 
 
